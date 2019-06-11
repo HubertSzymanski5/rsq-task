@@ -3,14 +3,23 @@ package pl.szymanskihubert.rsqtask.appointments
 import org.springframework.stereotype.Component
 import pl.szymanskihubert.rsqtask.doctors.DoctorsRepository
 import pl.szymanskihubert.rsqtask.patients.PatientsRepository
-import java.util.*
+import java.time.LocalDateTime
 
 @Component
 class AppointmentService( val appointmentsRepository: AppointmentsRepository, val doctorsRepository: DoctorsRepository, val patientsRepository: PatientsRepository ) {
 
     // add a new appointment
-    fun addNew() {
-        throw NotImplementedError()
+    fun addNew( newAppointment: Appointment) : String {
+
+        // check if patient exist
+        if ( !patientsRepository.existsById( newAppointment.patientId) ) return "Patient not found"
+
+        // check if doctor exist
+        if ( !doctorsRepository.existsById( newAppointment.doctorId) ) return "Doctor not found"
+
+        // if they exists add the appointment to the db
+        appointmentsRepository.save( newAppointment )
+        return "Appointment added"
     }
 
     // remove the appointment
@@ -19,8 +28,13 @@ class AppointmentService( val appointmentsRepository: AppointmentsRepository, va
     }
 
     // change date of the appointment
-    fun update( date: Date ) {
-        throw NotImplementedError()
+    fun update(appointmentId: Long, newDate: LocalDateTime) {
+        // find appointment by id
+        var appointmentToUpdate = appointmentsRepository.findById(appointmentId).get()
+
+        // update and save
+        appointmentToUpdate.date = newDate
+        appointmentsRepository.save( appointmentToUpdate )
     }
 
     // get all appointments
@@ -30,7 +44,7 @@ class AppointmentService( val appointmentsRepository: AppointmentsRepository, va
     fun getAllOfPatient(patientId: Long): List<Appointment> {
         val appointments = this.appointmentsRepository.findAll()
 
-        var patientAppointments: List<Appointment> = ArrayList<Appointment>()
+        var patientAppointments = listOf<Appointment>()
         // else if there is patientId iterate through to find specific patients only
         for( appointment in appointments ) {
             if ( appointment.patientId == patientId ) patientAppointments += appointment

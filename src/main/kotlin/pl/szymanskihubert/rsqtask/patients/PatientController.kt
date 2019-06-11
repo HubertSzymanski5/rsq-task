@@ -18,15 +18,15 @@ class PatientController ( val patientsRepository: PatientsRepository ) {
 
     // CREATE
     @PostMapping("")
-    fun patientsAddNew( newDoctor: Patient) = this.patientsRepository.save(newDoctor)
+    fun patientsAddNew( newPatient: Patient) = this.patientsRepository.save(newPatient)
 
     // UPDATE
     @PutMapping("/{id}")
-    fun patientsUpdateById(@PathVariable id: Long, updatedDoctor: Patient) {
+    fun patientsUpdateById(@PathVariable id: Long, updatedPatient: Patient) {
         // find specific patient to update
         var patient = this.patientsRepository.findById(id).get()
         // give him updated info
-        patient = updatedDoctor
+        patient = updatedPatient
         // save in repo
         this.patientsRepository.save(patient)
     }

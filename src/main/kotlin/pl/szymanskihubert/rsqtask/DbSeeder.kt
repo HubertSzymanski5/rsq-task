@@ -8,7 +8,7 @@ import pl.szymanskihubert.rsqtask.doctors.Doctor
 import pl.szymanskihubert.rsqtask.doctors.DoctorsRepository
 import pl.szymanskihubert.rsqtask.patients.Patient
 import pl.szymanskihubert.rsqtask.patients.PatientsRepository
-import java.util.*
+import java.time.LocalDateTime
 
 @Component
 class DbSeeder(val doctorsRepository: DoctorsRepository, val patientsRepository: PatientsRepository, val appointmentsRepository: AppointmentsRepository) : CommandLineRunner {
@@ -29,8 +29,9 @@ class DbSeeder(val doctorsRepository: DoctorsRepository, val patientsRepository:
         )
 
         val appointments = listOf(
-                Appointment( 3, 2, Date(19, 4, 20, 12, 30)),
-                Appointment( 4, 1, Date(19, 4, 21, 13, 0))
+                Appointment( 3, 2, LocalDateTime.of(2019, 4, 20, 12, 30)),
+                Appointment( 4, 1, LocalDateTime.of(2019, 4, 20, 12, 30))
+
         )
 
         // add them to db
