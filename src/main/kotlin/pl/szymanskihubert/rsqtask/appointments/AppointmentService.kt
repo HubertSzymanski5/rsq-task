@@ -23,18 +23,29 @@ class AppointmentService( val appointmentsRepository: AppointmentsRepository, va
     }
 
     // remove the appointment
-    fun delete() {
-        throw NotImplementedError()
+    fun delete( id: Long ) : String {
+
+        // if appointment does not exist return "Not Found"
+        if ( !appointmentsRepository.existsById(id) ) return "Not Found"
+
+        // else delete it and return "Deleted"
+        appointmentsRepository.deleteById( id )
+        return "Appointment Deleted"
+
     }
 
     // change date of the appointment
-    fun update(appointmentId: Long, newDate: LocalDateTime) {
+    fun update(appointmentId: Long, newDate: LocalDateTime) : String {
+        // check if appointment exists
+        if ( !appointmentsRepository.existsById( appointmentId ))
+            return "Appointment not found"
+
         // find appointment by id
         var appointmentToUpdate = appointmentsRepository.findById(appointmentId).get()
-
         // update and save
         appointmentToUpdate.date = newDate
         appointmentsRepository.save( appointmentToUpdate )
+        return "Appointment updated"
     }
 
     // get all appointments
