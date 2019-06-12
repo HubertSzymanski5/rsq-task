@@ -21,7 +21,7 @@ class AppointmentsRepoMock : AppointmentsRepository {
 
     override fun findById(id: Long): Optional<Appointment> {
         if ( id > 3 ) return Optional.empty()
-        else return Optional.of(Appointment(1,2, LocalDateTime.of(1,1,1,1,1)))
+        else return Optional.of(Appointment(1,2, "Poznań", LocalDateTime.of(1,1,1,1,1)))
     }
 
     override fun findAll(): MutableIterable<Appointment> {

@@ -11,17 +11,17 @@ class AppointmentServiceTest {
 
     @Test
     fun addNewWithCorrectData() {
-        assert( appointmentService.addNew( Appointment( 1, 2, LocalDateTime.of(2023, 12, 21, 12, 30))) == true )
+        assert( appointmentService.addNew( Appointment( 1, 2, "Poznań", LocalDateTime.of(2023, 12, 21, 12, 30))) == true )
     }
 
     @Test
     fun addNewWithWrongDoctorId() {
-        assert( appointmentService.addNew( Appointment( 1, 5, LocalDateTime.of(2020, 12, 12, 11, 15))) == false)
+        assert( appointmentService.addNew( Appointment( 1, 5, "Poznań", LocalDateTime.of(2020, 12, 12, 11, 15))) == false)
     }
 
     @Test
     fun addNewWithWrongPatientId() {
-        assert( appointmentService.addNew( Appointment( 4, 1, LocalDateTime.of(2023, 12, 21, 12, 30))) == false )
+        assert( appointmentService.addNew( Appointment( 4, 1, "Poznań", LocalDateTime.of(2023, 12, 21, 12, 30))) == false )
     }
 
     @Test
@@ -50,8 +50,8 @@ class AppointmentServiceTest {
     fun getAllWithData() {
         // little setup
         var appointments = mutableListOf(
-                Appointment(1,1, LocalDateTime.of(1,1,1,1,1)),
-                Appointment(2,2, LocalDateTime.of(2,2,2,2,2))
+                Appointment(1,1, "Poznań", LocalDateTime.of(1,1,1,1,1)),
+                Appointment(2,2, "Poznań", LocalDateTime.of(2,2,2,2,2))
         )
         appointmentRepoMock.appointments = appointments
 
@@ -66,8 +66,8 @@ class AppointmentServiceTest {
     fun getAllOfPatient() {
         // little setup
         var appointments = mutableListOf(
-                Appointment(1,1, LocalDateTime.of(1,1,1,1,1)),
-                Appointment(1,2, LocalDateTime.of(2,2,2,2,2))
+                Appointment(1,1, "Poznań", LocalDateTime.of(1,1,1,1,1)),
+                Appointment(1,2, "Poznań", LocalDateTime.of(2,2,2,2,2))
         )
         appointmentRepoMock.appointments = appointments
 
@@ -79,10 +79,10 @@ class AppointmentServiceTest {
     fun getAllOfPatientCount() {
         // little setup
         var appointments = mutableListOf(
-                Appointment(1,1, LocalDateTime.of(1,1,1,1,1)),
-                Appointment(1,2, LocalDateTime.of(2,2,2,2,2)),
-                Appointment(2,3, LocalDateTime.of(3,3,3,3,3)),
-                Appointment(3,4, LocalDateTime.of(4,4,4,4,4))
+                Appointment(1,1, "Poznań", LocalDateTime.of(1,1,1,1,1)),
+                Appointment(1,2, "Poznań", LocalDateTime.of(2,2,2,2,2)),
+                Appointment(2,3, "Poznań", LocalDateTime.of(3,3,3,3,3)),
+                Appointment(3,4, "Poznań", LocalDateTime.of(4,4,4,4,4))
         )
         appointmentRepoMock.appointments = appointments
 
@@ -94,10 +94,10 @@ class AppointmentServiceTest {
     fun getAllOfPatientEmpty() {
         // little setup
         var appointments = mutableListOf(
-                Appointment(1,1, LocalDateTime.of(1,1,1,1,1)),
-                Appointment(1,2, LocalDateTime.of(2,2,2,2,2)),
-                Appointment(2,3, LocalDateTime.of(3,3,3,3,3)),
-                Appointment(3,4, LocalDateTime.of(4,4,4,4,4))
+                Appointment(1,1, "Poznań", LocalDateTime.of(1,1,1,1,1)),
+                Appointment(1,2, "Poznań", LocalDateTime.of(2,2,2,2,2)),
+                Appointment(2,3, "Poznań", LocalDateTime.of(3,3,3,3,3)),
+                Appointment(3,4, "Poznań", LocalDateTime.of(4,4,4,4,4))
         )
         appointmentRepoMock.appointments = appointments
 
