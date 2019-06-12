@@ -3,7 +3,9 @@ package pl.szymanskihubert.rsqtask.appointments
 import java.time.LocalDateTime
 import java.util.*
 
-class AppointmentRepoMock : AppointmentsRepository {
+class AppointmentsRepoMock : AppointmentsRepository {
+
+    var appointments = mutableListOf<Appointment>()
 
     override fun <S : Appointment?> save(entity: S): S {
         return entity
@@ -22,11 +24,11 @@ class AppointmentRepoMock : AppointmentsRepository {
         else return Optional.of(Appointment(1,2, LocalDateTime.of(1,1,1,1,1)))
     }
 
-    // not used interface methods
-
     override fun findAll(): MutableIterable<Appointment> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return appointments
     }
+
+    // not used interface methods
 
     override fun deleteAll(entities: MutableIterable<Appointment>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

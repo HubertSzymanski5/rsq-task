@@ -6,7 +6,9 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class Doctor (val firstName: String, val lastName: String, val specialization: String){
+class Doctor (val firstName: String,
+              val lastName: String,
+              val specialization: String){
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

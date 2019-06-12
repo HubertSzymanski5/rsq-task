@@ -6,46 +6,47 @@ import pl.szymanskihubert.rsqtask.patients.PatientsRepository
 import java.time.LocalDateTime
 
 @Component
-class AppointmentService( val appointmentsRepository: AppointmentsRepository, val doctorsRepository: DoctorsRepository, val patientsRepository: PatientsRepository ) {
+class AppointmentService( val appointmentsRepository: AppointmentsRepository,
+                          val doctorsRepository: DoctorsRepository,
+                          val patientsRepository: PatientsRepository ) {
 
     // add a new appointment
-    fun addNew( newAppointment: Appointment) : String {
+    fun addNew( newAppointment: Appointment) : Boolean {
 
         // check if patient exist
-        if ( !patientsRepository.existsById( newAppointment.patientId) ) return "Patient not found"
+        if ( !patientsRepository.existsById( newAppointment.patientId) ) return false
 
         // check if doctor exist
-        if ( !doctorsRepository.existsById( newAppointment.doctorId) ) return "Doctor not found"
+        if ( !doctorsRepository.existsById( newAppointment.doctorId) ) return false
 
         // if they exists add the appointment to the db
         appointmentsRepository.save( newAppointment )
-        return "Appointment added"
+        return true
     }
 
     // remove the appointment
-    fun delete( id: Long ) : String {
+    fun delete( id: Long ) : Boolean {
 
-        // if appointment does not exist return "Not Found"
-        if ( !appointmentsRepository.existsById(id) ) return "Not Found"
+        // if appointment does not exist return false
+        if ( !appointmentsRepository.existsById(id) ) return false
 
-        // else delete it and return "Deleted"
+        // else delete it and return true
         appointmentsRepository.deleteById( id )
-        return "Appointment Deleted"
-
+        return true
     }
 
     // change date of the appointment
-    fun update(appointmentId: Long, newDate: LocalDateTime) : String {
+    fun update(appointmentId: Long, newDate: LocalDateTime) : Boolean {
         // check if appointment exists
         if ( !appointmentsRepository.existsById( appointmentId ))
-            return "Appointment not found"
+            return false
 
         // find appointment by id
         var appointmentToUpdate = appointmentsRepository.findById(appointmentId).get()
         // update and save
         appointmentToUpdate.date = newDate
         appointmentsRepository.save( appointmentToUpdate )
-        return "Appointment updated"
+        return true
     }
 
     // get all appointments

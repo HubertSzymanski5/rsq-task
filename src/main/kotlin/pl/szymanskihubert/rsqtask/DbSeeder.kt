@@ -10,6 +10,7 @@ import pl.szymanskihubert.rsqtask.patients.Patient
 import pl.szymanskihubert.rsqtask.patients.PatientsRepository
 import java.time.LocalDateTime
 
+// this is seeder for manual testing for example with POSTMAN
 @Component
 class DbSeeder(val doctorsRepository: DoctorsRepository, val patientsRepository: PatientsRepository, val appointmentsRepository: AppointmentsRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
@@ -29,8 +30,8 @@ class DbSeeder(val doctorsRepository: DoctorsRepository, val patientsRepository:
         )
 
         val appointments = listOf(
-                Appointment( 3, 2, LocalDateTime.of(2019, 4, 20, 12, 30)),
-                Appointment( 4, 1, LocalDateTime.of(2019, 4, 20, 12, 30))
+                Appointment( 3, 2,"Poznań Lux Med", LocalDateTime.of(2019, 4, 20, 12, 30)),
+                Appointment( 4, 1,"Warszawa Hiper Med", LocalDateTime.of(2019, 4, 20, 12, 30))
 
         )
 

@@ -7,7 +7,10 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class Appointment( var patientId: Long, var doctorId: Long, var date: LocalDateTime) {
+class Appointment( var patientId: Long,
+                   var doctorId: Long,
+                   var location: String,
+                   var date: LocalDateTime) {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )

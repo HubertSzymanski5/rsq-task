@@ -6,7 +6,9 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class Patient (val firstName: String, val lastName: String, val address: String) {
+class Patient (val firstName: String,
+               val lastName: String,
+               val address: String) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
